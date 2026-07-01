@@ -1,45 +1,60 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
+  <head>
     <title>Multilingual AI Language Learning Platform</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-</head>
-<body>
-
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
     <h1>Multilingual AI Language Learning Platform</h1>
 
     <h2>Translate Languages with AI</h2>
 
-    <label>Enter Text:</label><br>
-    <textarea rows="5" cols="50"></textarea>
+    <form method="POST">
+      <label>Enter Text:</label><br />
 
-    <br><br>
-    
-    <label>Source Language:</label>
-    <select>
+      <textarea name="text" rows="5" cols="50"></textarea>
+
+      <br /><br />
+
+      <label>Source Language:</label>
+
+      <select name="source_language">
         <option>English</option>
         <option>Kannada</option>
         <option>Marathi</option>
         <option>Telugu</option>
         <option>Bengali</option>
         <option>Punjabi</option>
-    </select>
+      </select>
 
-    <br><br>
+      <br /><br />
 
-    <label>Target Language:</label>
-    <select>
+      <label>Target Language:</label>
+
+      <select name="target_language">
         <option>English</option>
         <option>Kannada</option>
         <option>Marathi</option>
         <option>Telugu</option>
         <option>Bengali</option>
         <option>Punjabi</option>
-    </select>
+      </select>
 
-    <br><br>
+      <br /><br />
 
-    <button>Translate</button>
+      <button type="submit">Translate</button>
+    </form>
+    <hr />
 
-</body>
+    <h3>You Entered</h3>
+
+    <p><strong>Text:</strong> {{ text }}</p>
+
+    <p><strong>Source Language:</strong> {{ source_language }}</p>
+
+    <p><strong>Target Language:</strong> {{ target_language }}</p>
+  </body>
 </html>
