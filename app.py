@@ -1,7 +1,17 @@
 from flask import Flask, render_template, request
 from deep_translator import GoogleTranslator
+import mysql.connector
 
 app = Flask(__name__)
+connection = mysql.connector.connect(
+
+    host="localhost",
+    user="root",
+    password="tiger",
+    database="translator_db"
+)
+
+cursor = connection.cursor()
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
@@ -29,6 +39,19 @@ def home():
 
         # Translate the text
         translated_text = translator.translate(text)
+
+        query = """
+        INSERT INTO translations
+        (input_text, source_language, target_language, translated_text)
+        VALUES (%s, %s, %s, %s)
+        """
+        
+        cursor.execute(
+            query,
+            (text, source_language, target_language, translated_text)
+        )
+        
+        connection.commit()
 
         # Send all data to HTML
         return render_template(
