@@ -37,12 +37,18 @@ multilingual-language-translation-platform/
 ├── app.py
 ├── README.md
 ├── requirements.txt
+├── .gitignore
+├── screenshots/
+│   ├── home-page.png
+│   ├── translation-result.png
+│   ├── translation-history.png
+│   ├── delete-confirmation.png
+│   └── clear-history-confirmation.png
 ├── static/
 │   └── css/
-│       └── style.css
-├── templates/
-│   └── index.html
-└── venv/
+│       └── js
+└── templates/
+    └── index.html
 ```
 
 ---
