@@ -1,77 +1,62 @@
 <!doctype html>
 <html>
-  <head>
-    <title>Multilingual AI Language Learning Platform</title>
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/style.css') }}"
-    />
-  </head>
-  <body>
-    <h1>Multilingual AI Language Learning Platform</h1>
 
-    <h2>Translate Languages with AI</h2>
+<head>
+    <title>Multilingual Language Translation Platform</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <h1>Multilingual Language Translation Platform</h1>
+
+    <h2>Translate Languages</h2>
 
     <form method="POST">
-      <label>Enter Text:</label><br />
 
-      <textarea name="text" rows="5" cols="50">{{ text }}</textarea>
+        <label>Enter Text:</label><br>
 
-      <br /><br />
+        <textarea name="text" rows="5" cols="50">{{ text }}</textarea>
 
-      <label>Source Language:</label>
+        <br><br>
 
-      <select name="source_language">
-        <option {% if source_language == "English" %}selected{% endif %}>
-    English
-</option>
-        <option {% if source_language == "Kannada" %}selected{% endif %}>
-    Kannada
-</option>
-        <option {% if source_language == "Marathi" %}selected{% endif %}>
-    Marathi
-</option>
-        <option {% if source_language == "Telugu" %}selected{% endif %}>
-    Telugu
-</option>
-        <option {% if source_language == "Hindi" %}selected{% endif %}>
-    Hindi
-</option>
-        <option {% if source_language == "Punjabi" %}selected{% endif %}>
-    Punjabi
-</option>
-      </select>
+        <label>Source Language:</label>
 
-      <br /><br />
+        <select name="source_language">
 
-      <label>Target Language:</label>
+            <option {% if source_language == "English" %}selected{% endif %}>English</option>
+            <option {% if source_language == "Kannada" %}selected{% endif %}>Kannada</option>
+            <option {% if source_language == "Telugu" %}selected{% endif %}>Telugu</option>
+            <option {% if source_language == "Marathi" %}selected{% endif %}>Marathi</option>
+            <option {% if source_language == "Hindi" %}selected{% endif %}>Hindi</option>
+            <option {% if source_language == "Punjabi" %}selected{% endif %}>Punjabi</option>
 
-      <select name="target_language">
-        <option {% if target_language == "English" %}selected{% endif %}>
-    English
-</option>
-        <option {% if target_language == "Kannada" %}selected{% endif %}>
-    Kannada
-</option>
-        <option {% if target_language == "Marathi" %}selected{% endif %}>
-    Marathi
-</option>
-        <option {% if target_language == "Telugu" %}selected{% endif %}>
-    Telugu
-</option>
-        <option {% if target_language == "Hindi" %}selected{% endif %}>
-    Hindi
-</option>
-        <option {% if target_language == "Punjabi" %}selected{% endif %}>
-    Punjabi
-</option>
-      </select>
+        </select>
 
-      <br /><br />
+        <br><br>
 
-      <button type="submit">Translate</button>
+        <label>Target Language:</label>
+
+        <select name="target_language">
+
+            <option {% if target_language == "English" %}selected{% endif %}>English</option>
+            <option {% if target_language == "Kannada" %}selected{% endif %}>Kannada</option>
+            <option {% if target_language == "Telugu" %}selected{% endif %}>Telugu</option>
+            <option {% if target_language == "Marathi" %}selected{% endif %}>Marathi</option>
+            <option {% if target_language == "Hindi" %}selected{% endif %}>Hindi</option>
+            <option {% if target_language == "Punjabi" %}selected{% endif %}>Punjabi</option>
+
+        </select>
+
+        <br><br>
+
+        <button type="submit">Translate</button>
+
     </form>
-    <hr />
+
+    <hr>
 
     <h3>You Entered</h3>
 
@@ -83,8 +68,55 @@
 
     <h3>Translated Text</h3>
 
-<textarea rows="5" cols="50" readonly>
-{{ translated_text }}
-</textarea>
-  </body>
+    <textarea rows="5" cols="50" readonly>{{ translated_text }}</textarea>
+
+    <hr>
+
+    <h2>Translation History</h2>
+
+    <a href="/clear"
+   onclick="return confirm('Are you sure you want to clear all translation history?')">
+
+    <button style="background-color:red;">
+        Clear All History
+    </button>
+
+</a>
+
+<br><br>
+
+    <table border="1">
+
+        <tr>
+            <th>ID</th>
+            <th>Input Text</th>
+            <th>Source Language</th>
+            <th>Target Language</th>
+            <th>Translated Text</th>
+            <th>Action</th>
+        </tr>
+
+        {% for row in history %}
+
+        <tr>
+            <td>{{ row[0] }}</td>
+            <td>{{ row[1] }}</td>
+            <td>{{ row[2] }}</td>
+            <td>{{ row[3] }}</td>
+            <td>{{ row[4] }}</td>
+
+            <td>
+                <a href="/delete/{{ row[0] }}"
+   onclick="return confirm('Are you sure you want to delete this translation?')">
+   Delete
+</a>
+            </td>
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+</body>
+
 </html>
